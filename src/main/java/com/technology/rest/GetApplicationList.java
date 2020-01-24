@@ -10,11 +10,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/list")
+@Path("/")
 public class GetApplicationList {
     @GET
+    @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getMsg() {
+    public Response getList() {
         List<AppInfo> app = ApplicationListService.collectAllDeployedApps();
         return Response.status(200).entity(app).build();
     }

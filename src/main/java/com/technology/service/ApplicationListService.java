@@ -35,7 +35,7 @@ public class ApplicationListService {
                         AppInfo app = new AppInfo();
                         app.setName(appName);
                         FileTime fileTime;
-                        Path path = Paths.get(System.getProperty("catalina.base").concat("/webapps/").concat(appName).concat(".war"));
+                        Path path = Paths.get(String.format("%s/webapps/%s.war", System.getProperty("catalina.base"),appName));
                         try {
                             fileTime = Files.getLastModifiedTime(path);
                             app.setLastModifiedTime(new Date(fileTime.toMillis()));
