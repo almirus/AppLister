@@ -1,5 +1,4 @@
 (function () {
-    const ACTUATOR_URL = '/actuator/version.json';
     document.addEventListener('DOMContentLoaded', () => {
         fetch('./api/list')
             .then(response => response.json())
@@ -10,7 +9,7 @@
                     app_row.id = appName;
                     app_row.innerHTML = `<a href="/${appName}/" target="_blank">${appName}</a>`;
                     document.body.appendChild(app_row);
-                    fetch(`/${appName}${ACTUATOR_URL}`)
+                    fetch(`/..${appInfo.actuatorVersionLink}`)
                         .then(response => response.json())
                         .then(versionInfo => {
                             let version_span = document.createElement('span');

@@ -42,6 +42,7 @@ public class ApplicationListService {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                        app.setActuatorVersionLink(String.format("/%s/actuator/version.json", appName));
                         return app;
                     })
                     .collect(Collectors.toList());

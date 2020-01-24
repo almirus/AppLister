@@ -8,4 +8,5 @@ import java.util.Date;
 public class AppInfo {
     private String name;
     private Date lastModifiedTime;
+    private String  actuatorVersionLink;
 }
