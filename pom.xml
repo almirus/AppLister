@@ -141,17 +141,6 @@
                     </execution>
                     <!--
                     <execution>
-                        <id>webpack build</id>
-                        <goals>
-                            <goal>webpack</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <arguments>-p</arguments>
-                        </configuration>
-                    </execution>
-                    <!--
-                    <execution>
                         <id>webpack-build</id>
                         <goals><goal>npm</goal></goals>
                         <configuration>
