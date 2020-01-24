@@ -130,14 +130,27 @@
                         </configuration>
                     </execution>
                     <execution>
+                        <id>webpack build</id>
+                        <goals>
+                            <goal>webpack</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>-p</arguments>
+                        </configuration>
+                    </execution>
+                    <!--
+                    <execution>
                         <id>webpack-build</id>
                         <goals><goal>npm</goal></goals>
                         <configuration>
-                            <arguments>-prefix js/ run build-prod</arguments>
+                            <arguments>-prefix .js/ run build-prod</arguments>
                         </configuration>
                     </execution>
+                    -->
                 </executions>
                 <configuration>
+                    <workingDirectory>js</workingDirectory>
                     <nodeVersion>v12.14.0</nodeVersion>
                     <npmVersion>6.13.4</npmVersion>
                     <environmentVariables>

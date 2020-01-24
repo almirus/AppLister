@@ -1,5 +1,6 @@
 package com.technology.rest;
 
+import com.technology.com.technology.entity.AppInfo;
 import com.technology.service.ApplicationListService;
 
 import javax.ws.rs.GET;
@@ -14,7 +15,7 @@ public class GetApplicationList {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMsg() {
-        List<String> app = ApplicationListService.collectAllDeployedApps();
+        List<AppInfo> app = ApplicationListService.collectAllDeployedApps();
         return Response.status(200).entity(app).build();
     }
 }
