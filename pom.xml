@@ -119,7 +119,6 @@
                         </goals>
                         <phase>generate-resources</phase>
                     </execution>
-
                     <execution>
                         <id>run npm install</id>
                         <goals>
@@ -129,6 +128,18 @@
                             <arguments>install</arguments>
                         </configuration>
                     </execution>
+
+                    <execution>
+                        <id>webpack build</id>
+                        <goals>
+                            <goal>webpack</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>-p</arguments>
+                        </configuration>
+                    </execution>
+                    <!--
                     <execution>
                         <id>webpack build</id>
                         <goals>
@@ -153,10 +164,6 @@
                     <workingDirectory>js</workingDirectory>
                     <nodeVersion>v12.14.0</nodeVersion>
                     <npmVersion>6.13.4</npmVersion>
-                    <environmentVariables>
-                        <https.proxyHost>127.0.0.1</https.proxyHost>
-                        <http.proxyPort>3128</http.proxyPort>
-                    </environmentVariables>
                 </configuration>
             </plugin>
         </plugins>

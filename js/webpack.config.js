@@ -19,5 +19,9 @@ module.exports = {
     },
 };
 if (process.env.NODE_ENV === 'production') {
-    module.exports.plugins = (module.exports.plugins || []).concat([
-        new webpack.optimize.UglifyJsPlugin({})])}
+    module.exports = {
+        optimization: {
+            minimize: false //Update this to true or false
+        }
+    };
+}
