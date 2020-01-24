@@ -1,4 +1,4 @@
-package com.technology.com.technology.entity;
+package com.technology.entity;
 
 import lombok.Data;
 

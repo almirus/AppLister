@@ -1,6 +1,6 @@
 package com.technology.rest;
 
-import com.technology.com.technology.entity.AppInfo;
+import com.technology.entity.AppInfo;
 import com.technology.service.ApplicationListService;
 
 import javax.ws.rs.GET;
