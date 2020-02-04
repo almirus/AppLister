@@ -18,4 +18,28 @@
     <servlet-name>jersey-serlvet</servlet-name>
     <url-pattern>/api/*</url-pattern>
   </servlet-mapping>
+
+  <security-role>
+    <role-name>manager-gui</role-name>
+  </security-role>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Public resources</web-resource-name>
+      <url-pattern>/*</url-pattern>
+      <url-pattern>/api/application/*</url-pattern>
+    </web-resource-collection>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Protected resources (API)</web-resource-name>
+      <url-pattern>/api/version/*</url-pattern>
+      <url-pattern>/api/operator/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>manager-gui</role-name>
+    </auth-constraint>
+  </security-constraint>
+
 </web-app>

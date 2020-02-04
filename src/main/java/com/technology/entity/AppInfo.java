@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class AppInfo {
-    private String name;
-    private Date lastModifiedTime;
-    private String  actuatorVersionLink;
+    String name;
+    Date lastModifiedTime;
+    String actuatorVersionLink;
 }

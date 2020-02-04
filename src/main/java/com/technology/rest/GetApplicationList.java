@@ -1,9 +1,11 @@
 package com.technology.rest;
 
-import com.technology.entity.AppVersion;
+import com.technology.dao.AppVersionDaoImpl;
 import com.technology.entity.AppInfo;
+import com.technology.entity.AppVersion;
+import com.technology.entity.Operator;
 import com.technology.service.ApplicationListService;
-import com.technology.service.ApplicationVersionService;
+import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.naming.NamingException;
 import javax.ws.rs.GET;
@@ -15,20 +17,30 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/")
-public class GetApplicationList {
+public class GetApplicationList extends ResourceConfig {
+
     @GET
-    @Path("/list")
+    @Path("/application/list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getList() {
         List<AppInfo> app = ApplicationListService.collectAllDeployedApps();
         return Response.status(200).entity(app).build();
     }
+
     @GET
-    @Path("/{moduleName}")
+    @Path("/version/{moduleName}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAppInfo(@PathParam("moduleName") String moduleName) throws NamingException {
-        ApplicationVersionService service = new ApplicationVersionService();
-        List<AppVersion> app = service.getAppInfo(moduleName);
+        AppVersionDaoImpl service = new AppVersionDaoImpl();
+        List<AppVersion> app = service.fetchAppInfo(moduleName);
         return Response.status(200).entity(app).build();
+    }
+    @GET
+    @Path("/operator/{operatorId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOperator(@PathParam("operatorId") Long operatorId) throws NamingException {
+        AppVersionDaoImpl service = new AppVersionDaoImpl();
+        Operator operator = service.fetchOperator(operatorId);
+        return Response.status(200).entity(operator).build();
     }
 }

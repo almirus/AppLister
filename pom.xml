@@ -59,17 +59,10 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.sql2o/sql2o -->
         <dependency>
-            <groupId>org.sql2o</groupId>
-            <artifactId>sql2o</artifactId>
-            <version>1.6.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.sql2o.extensions/sql2o-oracle -->
-        <dependency>
-            <groupId>org.sql2o.extensions</groupId>
-            <artifactId>sql2o-oracle</artifactId>
-            <version>1.6.0-RC3</version>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.3</version>
         </dependency>
     </dependencies>
     <build>

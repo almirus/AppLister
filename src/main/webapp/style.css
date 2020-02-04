@@ -19,4 +19,46 @@ span.version{
     font: 100 15px/1.5 Helvetica, Verdana, sans-serif;
     color: #3d3d3d;
     padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+ul.version{
+    margin: 0;
+    list-style-type: none;
+}
+.version li{
+    font: 100 15px/1.5 Helvetica, Verdana, sans-serif;
+}
+.collapsible {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+    border: none;
+    text-align: left;
+    outline: none;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+    background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+span.actuator{
+    background-color: rgba(177, 253, 207, 0.63);
+}
+span.db{
+    background-color: rgba(255, 83, 97, 0.42);
 }
