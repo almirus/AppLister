@@ -1,9 +1,14 @@
-h2 {
-    font: 200 30px/1.5 Helvetica, Verdana, sans-serif;
+body{
+    font: 15px/1.5 Helvetica, Verdana, sans-serif;
+}
+span.mainTitle  {
+    font-size:  30px;
+    padding-bottom: 10px;
 }
 h3 {
-    font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+    font-size:  20px;
     border-bottom: 1px solid #ccc;
+    font-weight: normal;
 }
 h3 a {
     text-decoration: none;
@@ -16,7 +21,7 @@ h3 a {
     transition: font-size 0.3s ease, background-color 0.3s ease;
 }
 span.version{
-    font: 100 15px/1.5 Helvetica, Verdana, sans-serif;
+    font-size: 15px;
     color: #3d3d3d;
     padding-left: 10px;
     padding-right: 10px;
@@ -25,12 +30,11 @@ span.version{
 }
 
 ul.version{
+    font-size: 15px;
     margin: 0;
     list-style-type: none;
 }
-.version li{
-    font: 100 15px/1.5 Helvetica, Verdana, sans-serif;
-}
+
 .collapsible {
     background-color: #eee;
     color: #444;
@@ -56,9 +60,16 @@ ul.version{
     overflow: hidden;
     transition: max-height 0.2s ease-out;
 }
-span.actuator{
-    background-color: rgba(177, 253, 207, 0.63);
-}
+
 span.db{
     background-color: rgba(255, 83, 97, 0.42);
+    cursor: default;
+}
+span.actuator{
+    background-color: rgba(177, 253, 207, 0.63);
+    cursor: default;
+}
+span.war{
+    background-color: rgba(46, 141, 255, 0.33);
+    cursor: default;
 }

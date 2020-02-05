@@ -17,6 +17,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.util.List;
 
+import static com.technology.service.Constants.DATA_SOURCE_JNDI_NAME;
+
 public class AppVersionDaoImpl implements AppVersionDao {
 
     private SqlSessionFactory sqlSessionFactory;
@@ -24,7 +26,7 @@ public class AppVersionDaoImpl implements AppVersionDao {
     public AppVersionDaoImpl() throws NamingException {
         Context initContext = new InitialContext();
         Context envContext = (Context) initContext.lookup("java:/comp/env");
-        DataSource ds = (DataSource) envContext.lookup("jdbc/RFInfoDS");
+        DataSource ds = (DataSource) envContext.lookup(DATA_SOURCE_JNDI_NAME);
         Environment environment = new Environment("Development", new JdbcTransactionFactory(), ds);
         Configuration configuration = new Configuration(environment);
         configuration.setMapUnderscoreToCamelCase(true);

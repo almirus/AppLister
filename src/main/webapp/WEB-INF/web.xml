@@ -20,7 +20,7 @@
   </servlet-mapping>
 
   <security-role>
-    <role-name>manager-gui</role-name>
+    <role-name>SsaLogin</role-name>
   </security-role>
 
   <security-constraint>
@@ -36,9 +36,10 @@
       <web-resource-name>Protected resources (API)</web-resource-name>
       <url-pattern>/api/version/*</url-pattern>
       <url-pattern>/api/operator/*</url-pattern>
+      <url-pattern>/api/serverInfo/*</url-pattern>
     </web-resource-collection>
     <auth-constraint>
-      <role-name>manager-gui</role-name>
+      <role-name>SsaLogin</role-name>
     </auth-constraint>
   </security-constraint>
 
