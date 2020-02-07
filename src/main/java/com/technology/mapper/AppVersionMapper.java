@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface AppVersionMapper {
     //language=Oracle
-    @Select ("select * from V_MOD_APP_INSTALL_RESULT where UPPER(MODULE_NAME) = #{appName} order by DEPLOYMENT_ID desc")
+    @Select ("select * from V_MOD_APP_INSTALL_RESULT where UPPER(MODULE_NAME) = #{appName} order by INSTALL_DATE desc")
     List<AppVersion> getAppVersionByName(String appName);
 }
