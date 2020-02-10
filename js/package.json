@@ -21,8 +21,7 @@
     "webpack-merge": "^4.2.2"
   },
   "scripts": {
-    "build-dev": "cross-env NODE_ENV=dev webpack --color",
-    "build-dev-w": "cross-env NODE_ENV=dev webpack --color --watch",
-    "build-prod": "cross-env NODE_ENV=production webpack --hide-modules"
+    "build-dev": "cross-env NODE_ENV=development webpack --config webpack.dev.js",
+    "build-prod": "cross-env NODE_ENV=production webpack --config webpack.prod.js"
   }
 }
