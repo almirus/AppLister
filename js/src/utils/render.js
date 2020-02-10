@@ -39,10 +39,14 @@ export function renderAppList(domContainer) {
                 fetch(`/..${appInfo.actuatorVersionLink}`)
                     .then(response => response.json())
                     .then(fileVersionInfo => {
+                        // в IE нужно отпарсить строку в дату (2020.02.06 17:31:02)
+                        const a = fileVersionInfo.compile.time_stamp.split(' ');
+                        const d = a[0].split('.');
+                        const t = a[1].split(':');
                         let version_span = renderInfoBlock('span', 'version from Actuator', 'version actuator', {
                             installVersion: fileVersionInfo.svn.tag_version,
                             svnVersionInfo: fileVersionInfo.svn.revision,
-                            installDate: fileVersionInfo.compile.time_stamp,
+                            installDate: new Date(+d[0], (+d[1] - 1), +d[2], +t[0], +t[1]),
                         });
                         document.getElementById(appName).appendChild(version_span); // дополняем рядом с названием приложения
                     }).catch(err => {
@@ -59,7 +63,7 @@ export function renderAppList(domContainer) {
                             let version_span = renderInfoBlock('span', 'version from ModuleInfo', 'version db', {
                                 installVersion: version.installVersion,
                                 svnVersionInfo: version.svnVersionInfo,
-                                installDate: version.installDate,
+                                installDate: new Date(version.installDate),
                                 operatorId: version.operatorId
                             });
                             document.getElementById(appName).appendChild(version_span); // дополняем рядом с названием приложения
@@ -74,7 +78,7 @@ export function renderAppList(domContainer) {
                             let li = renderInfoBlock('li', '', '', {
                                 installVersion: version.installVersion,
                                 svnVersionInfo: version.svnVersionInfo,
-                                installDate: version.installDate,
+                                installDate: new Date(version.installDate),
                                 path: version.svnPath,
                                 operatorId: version.operatorId
                             });
@@ -98,7 +102,7 @@ export function renderAppList(domContainer) {
                     console.warn('Can\'t get app version.', err);
                 });
                 let version_span = renderInfoBlock('span','war file timestamp', 'version war', {
-                    installDate: appInfo.lastModifiedTime,
+                    installDate: new Date(appInfo.lastModifiedTime),
                 });
                 document.getElementById(appName).appendChild(version_span); // дополняем данными timestamp рядом с названием приложения
             });
@@ -111,7 +115,7 @@ function renderInfoBlock(domType = 'span', title, className, versionInfo = {}) {
     if (Object.values(versionInfo).every(x => (x === null || x === ''))) return createElement('span');
     let element = createElement(domType, className);
     if (title) element.title = title;
-    let date = versionInfo.installDate ? new Date(versionInfo.installDate) : undefined;
+    let date = versionInfo.installDate ? versionInfo.installDate : undefined;
     element.innerHTML = `${versionInfo.installVersion ? versionInfo.installVersion : ''} 
                         ${versionInfo.svnVersionInfo ? '#' + versionInfo.svnVersionInfo : ''} 
                         ${versionInfo.installDate ? `(${date.toLocaleDateString()} ${date.toLocaleTimeString()})` : ''}
