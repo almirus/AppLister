@@ -116,11 +116,11 @@ function renderInfoBlock(domType = 'span', title, className, versionInfo = {}) {
     if (Object.values(versionInfo).every(x => (x === null || x === ''))) return document.createTextNode(""); // возвращаем пустой DOM element если нечего рендерить
     if (title) element.title = title;
     let date = versionInfo.installDate ? versionInfo.installDate : undefined;
-    element.innerHTML = (versionInfo.installVersion ? versionInfo.installVersion : '') +
-                        (versionInfo.svnVersionInfo ? '#' + versionInfo.svnVersionInfo : '')+
-                        (versionInfo.installDate ? date.toLocaleDateString()+' '+ date.toLocaleTimeString() : '')+
-                        (versionInfo.path ? versionInfo.path : '')+
-                        (versionInfo.operatorId ? `<span class="operatorName" data-id="(versionInfo.operatorId)"></span>` : '');
+    element.innerHTML =  [versionInfo.installVersion,
+                          versionInfo.svnVersionInfo ? '#' + versionInfo.svnVersionInfo : undefined,
+                          versionInfo.installDate ? '('+date.toLocaleDateString()+' '+ date.toLocaleTimeString()+')' : undefined,
+                          versionInfo.path,
+                          versionInfo.operatorId ? '<span class="operatorName" data-id="'+versionInfo.operatorId+'"></span>' : undefined].filter(Boolean).join(' ');
     return element;
 }
 
