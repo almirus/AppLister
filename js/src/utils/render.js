@@ -101,8 +101,8 @@ export function renderAppList(domContainer) {
                     }).catch(err => {
                     console.warn('Can\'t get app version.', err);
                 });
-                let version_span = renderInfoBlock('span','war file timestamp', 'version war', {
-                    installDate: new Date(appInfo.lastModifiedTime),
+                let version_span = renderInfoBlock('span', 'war file timestamp', 'version war', {
+                    installDate: appInfo.lastModifiedTime == null ? null : new Date(appInfo.lastModifiedTime),
                 });
                 document.getElementById(appName).appendChild(version_span); // дополняем данными timestamp рядом с названием приложения
             });
@@ -112,15 +112,15 @@ export function renderAppList(domContainer) {
 }
 
 function renderInfoBlock(domType = 'span', title, className, versionInfo = {}) {
-    if (Object.values(versionInfo).every(x => (x === null || x === ''))) return createElement('span');
     let element = createElement(domType, className);
+    if (Object.values(versionInfo).every(x => (x === null || x === ''))) return document.createTextNode(""); // возвращаем пустой DOM element если нечего рендерить
     if (title) element.title = title;
     let date = versionInfo.installDate ? versionInfo.installDate : undefined;
-    element.innerHTML = `${versionInfo.installVersion ? versionInfo.installVersion : ''} 
-                        ${versionInfo.svnVersionInfo ? '#' + versionInfo.svnVersionInfo : ''} 
-                        ${versionInfo.installDate ? `(${date.toLocaleDateString()} ${date.toLocaleTimeString()})` : ''}
-                        ${versionInfo.path ? versionInfo.path : ''}
-                        ${versionInfo.operatorId ? `<span class="operatorName" data-id="${versionInfo.operatorId}"></span>` : ''}`;
+    element.innerHTML = (versionInfo.installVersion ? versionInfo.installVersion : '') +
+                        (versionInfo.svnVersionInfo ? '#' + versionInfo.svnVersionInfo : '')+
+                        (versionInfo.installDate ? date.toLocaleDateString()+' '+ date.toLocaleTimeString() : '')+
+                        (versionInfo.path ? versionInfo.path : '')+
+                        (versionInfo.operatorId ? `<span class="operatorName" data-id="(versionInfo.operatorId)"></span>` : '');
     return element;
 }
 
