@@ -148,7 +148,7 @@
                         <phase>generate-resources</phase>
                         <configuration>
                             <environmentVariables>
-                                <NODE_ENV>dev</NODE_ENV>
+                                <NODE_ENV>prod</NODE_ENV>
                             </environmentVariables>
                         </configuration>
                     </execution>
