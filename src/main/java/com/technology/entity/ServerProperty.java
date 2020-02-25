@@ -2,6 +2,8 @@ package com.technology.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ServerProperty {
     String javaVersion;
@@ -10,4 +12,5 @@ public class ServerProperty {
     String javaOPTS;
     String jdbcUrl;
     String jdbcVersion;
+    List<Connector> connectors;
 }

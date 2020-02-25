@@ -9,4 +9,5 @@ public class AppInfo {
     String name;
     Date lastModifiedTime;
     String actuatorVersionLink;
+    String warPath;
 }

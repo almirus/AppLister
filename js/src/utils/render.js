@@ -8,12 +8,24 @@ export function renderServerInfo(domContainer) {
         .then(server => {
             let div = createElement('div', 'version content');
             let button = renderMoreButton(`(${server.jdbcUrl})`);
+            let connectors = '';
+            if (server.connectors.length > 0) {
+                connectors = '<table><tr>';
+                Object.keys(server.connectors[0]).forEach(header => {
+                    connectors += `<th>${header}</th>`
+                });
+                server.connectors.forEach(item => {
+                    connectors += `<tr>${Object.values(item).map(value => `<td>${value}</td>`).join('')}</tr>`;
+                });
+                connectors += '</tr></table>';
+            }
             div.innerHTML =
                 `Java version = ${server.javaVersion}<br>
                 Tomcat version = ${server.tomcatVersion}<br>
                 Oracle version = ${server.oracleVersion}<br>
                 jdbc version = ${server.jdbcVersion}<br>
-                java OPTS = ${server.javaOPTS}
+                java OPTS = ${server.javaOPTS}<br>
+                ${connectors}
                 `;
             document.getElementById(domContainer).appendChild(button);
             document.getElementById(domContainer).appendChild(div);
@@ -116,11 +128,11 @@ function renderInfoBlock(domType = 'span', title, className, versionInfo = {}) {
     if (Object.values(versionInfo).every(x => (x === null || x === ''))) return document.createTextNode(""); // возвращаем пустой DOM element если нечего рендерить
     if (title) element.title = title;
     let date = versionInfo.installDate ? versionInfo.installDate : undefined;
-    element.innerHTML =  [versionInfo.installVersion,
-                          versionInfo.svnVersionInfo ? '#' + versionInfo.svnVersionInfo : undefined,
-                          versionInfo.installDate ? '('+date.toLocaleDateString()+' '+ date.toLocaleTimeString()+')' : undefined,
-                          versionInfo.path,
-                          versionInfo.operatorId ? '<span class="operatorName" data-id="'+versionInfo.operatorId+'"></span>' : undefined].filter(Boolean).join(' ');
+    element.innerHTML = [versionInfo.installVersion,
+        versionInfo.svnVersionInfo ? '#' + versionInfo.svnVersionInfo : undefined,
+        versionInfo.installDate ? '(' + date.toLocaleDateString() + ' ' + date.toLocaleTimeString() + ')' : undefined,
+        versionInfo.path,
+        versionInfo.operatorId ? '<span class="operatorName" data-id="' + versionInfo.operatorId + '"></span>' : undefined].filter(Boolean).join(' ');
     return element;
 }
 
