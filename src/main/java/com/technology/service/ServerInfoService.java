@@ -96,6 +96,7 @@ public class ServerInfoService {
                     }
                     return app;
                 })
+                .filter(item -> item.getLastModifiedTime() != null)
                 .sorted(Comparator.comparing(AppInfo::getName))
                 .collect(Collectors.toList());
 
