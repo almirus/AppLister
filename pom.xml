@@ -17,7 +17,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <webpack.env>prod</webpack.env>
     </properties>
 
     <dependencies>
@@ -59,6 +58,19 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
         </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>8.5.51</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>AppLister</finalName>
@@ -109,7 +121,7 @@
                 <artifactId>frontend-maven-plugin</artifactId>
                 <!-- Use the latest released version:
                 https://repo1.maven.org/maven2/com/github/eirslett/frontend-maven-plugin/ -->
-                <version>1.8.0</version>
+                <version>1.9.1</version>
                 <executions>
                     <execution>
                         <id>install node and npm</id>
@@ -135,18 +147,11 @@
                         </goals>
                         <phase>generate-resources</phase>
                         <configuration>
-                            <arguments>-p</arguments>
+                            <environmentVariables>
+                                <NODE_ENV>prod</NODE_ENV>
+                            </environmentVariables>
                         </configuration>
                     </execution>
-                    <!--
-                    <execution>
-                        <id>webpack-build</id>
-                        <goals><goal>npm</goal></goals>
-                        <configuration>
-                            <arguments>-prefix .js/ run build-prod</arguments>
-                        </configuration>
-                    </execution>
-                    -->
                 </executions>
                 <configuration>
                     <workingDirectory>js</workingDirectory>

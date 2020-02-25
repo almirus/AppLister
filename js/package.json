@@ -13,6 +13,7 @@
     "@babel/preset-env": "^7.7.7",
     "babel-loader": "^8.0.6",
     "cross-env": "^6.0.3",
+    "serialize-javascript": "^2.1.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.41.4",
     "webpack-cli": "^3.3.10",
@@ -20,8 +21,7 @@
     "webpack-merge": "^4.2.2"
   },
   "scripts": {
-    "build-dev": "cross-env NODE_ENV=dev webpack --color",
-    "build-dev-w": "cross-env NODE_ENV=dev webpack --color --watch",
-    "build-prod": "cross-env NODE_ENV=production webpack --hide-modules"
+    "build-dev": "cross-env NODE_ENV=development webpack --config webpack.dev.js",
+    "build-prod": "cross-env NODE_ENV=production webpack --config webpack.prod.js"
   }
 }
