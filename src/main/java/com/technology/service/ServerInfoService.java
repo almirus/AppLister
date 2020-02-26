@@ -50,7 +50,8 @@ public class ServerInfoService {
         info.setJdbcUrl(StringUtils.substringAfterLast(ds.getConnection().getMetaData().getURL(), "//"));
         info.setJdbcVersion(ds.getConnection().getMetaData().getDriverVersion());
         info.setOracleVersion(ds.getConnection().getMetaData().getDatabaseProductVersion());
-
+        List<String> arguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
+        info.setJavaOPTS(String.join(",",arguments));
         info.setJavaVersion(System.getProperty("java.runtime.version"));
 
         info.setTomcatVersion(getServerInstance().getServerInfo());
@@ -75,9 +76,7 @@ public class ServerInfoService {
      * @return Iterable<String>
      */
     public static List<AppInfo> collectAllDeployedApps() {
-
-        Engine engine = getCatalinaService().getContainer();
-        Container[] containers = engine.findChildren();
+        Container[] containers = getCatalinaService().getContainer().findChildren();
         return Arrays.stream(containers)
                 .flatMap(container -> Arrays.stream(container.findChildren()))
                 .map(webApp -> {
@@ -86,12 +85,13 @@ public class ServerInfoService {
                     app.setName(appName);
                     app.setActuatorVersionLink(String.format("/%s/actuator/version.json", appName));
                     try {
-                        String pathStr = webApp.getCatalinaBase().getPath();
-                        Path path = Paths.get(String.format("%s/webapps/%s.war", pathStr, appName));
-                        app.setWarPath(StringUtils.chop(pathStr).concat(".war"));
+
+                        //String pathStr =  ((StandardContext) webApp).getDocBase();
+                        Path path = Paths.get(((StandardContext) webApp).getOriginalDocBase());
+                        app.setWarPath(path.toString());
                         FileTime fileTime = Files.getLastModifiedTime(path);
                         app.setLastModifiedTime(new Date(fileTime.toMillis()));
-                    } catch (IOException e) {
+                    } catch (IOException | NullPointerException e) {
                         e.printStackTrace();
                     }
                     return app;
